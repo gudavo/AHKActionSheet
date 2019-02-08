@@ -143,11 +143,20 @@ static const CGFloat kCancelButtonShadowHeightRatio = 0.333f;
     cell.textLabel.textAlignment = [self.buttonTextCenteringEnabled boolValue] ? NSTextAlignmentCenter : NSTextAlignmentLeft;
 
     // Use image with template mode with color the same as the text (when enabled).
-    BOOL useTemplateMode = [UIImage instancesRespondToSelector:@selector(imageWithRenderingMode:)] && [self.automaticallyTintButtonImages boolValue];
+   /* BOOL useTemplateMode = [UIImage instancesRespondToSelector:@selector(imageWithRenderingMode:)] && [self.automaticallyTintButtonImages boolValue];
     cell.imageView.image = useTemplateMode ? [item.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : item.image;
 
     if ([UIImageView instancesRespondToSelector:@selector(tintColor)]){
         cell.imageView.tintColor = attributes[NSForegroundColorAttributeName] ? attributes[NSForegroundColorAttributeName] : [UIColor blackColor];
+    }*/
+    if(item.image){
+        cell.accessoryView = [[UIImageView alloc] initWithImage:item.image];
+        cell.accessoryType= UITableViewCellAccessoryCheckmark;
+        cell.indentationLevel = 4;
+    }else{
+        cell.accessoryView = nil;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.indentationLevel = 0;
     }
 
     cell.backgroundColor = [UIColor clearColor];
